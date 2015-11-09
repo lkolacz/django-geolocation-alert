@@ -31,11 +31,6 @@ Licence
 
 MIT
 
-Documentation
--------------
-
-TODO
-
 Quickstart
 ----------
 
@@ -55,28 +50,28 @@ Now it's works :)
 
 More custom? Ok, lets handle alert signals!
 
-1. Make some function:
+1. Make some function::
 
-        def alert_geolocation_handler():
-            # do some staff
-            ..
+    def alert_geolocation_handler(sender, request, user, **kwargs):
+        # do some staff
+        # deactivate User and force SMS code send to confirm identity
+        ..
 
-    tip -> deactivate User and force SMS code send to confirm identity
+2. Connect Your function with signal::
 
-2. Connect Your function with signal:
+    from geolocation.signal import geolocation_signal
+    geolocation_signal.connect(alert_geolocation_handler)
 
-        from geolocation.signal import geolocation_signal
-        geolocation_signal.connect(alert_geolocation_handler)
+3. Last step -> Turn On send alert signal in your prj settings::
 
-3. Last step -> Turn On send alert signal in your prj settings:
-
-        GEOLOCATION_SEND_SIGNAL = True
+    GEOLOCATION_SEND_SIGNAL = True
 
 
-django.conf.settings:
----------------------
 
-    Override some of them if needed.
+django.conf.settings
+--------------------
+
+Override some of them if needed.
 
 
 **GEOLOCATION_HASH**
@@ -92,22 +87,23 @@ just turn it on and make some handler for your purpose.
 **GEOLOCATION_SEND_MSG**
 
 Default is set to None. This will add standard messages (django.contrib.messages)
-as an messages.WARNING mode with text:
+as an messages.WARNING mode with text::
 
     IP address or agent browser change during session time, after log on.
 
-If You want set different message just set it in prj settings.
+If You want set different message just set it in prj settings::
 
-    GEOLOCATION_SEND_MSG = 'You bastard!!! I see you!!!'
+    from django.utils.translation import ugettext_lazy as _
+    GEOLOCATION_SEND_MSG = _('You bastard!!! I got you!!!')
 
-Or turn it off by:
+Or turn it off by::
 
     GEOLOCATION_SEND_MSG = False
 
 **GEOLOCATION_USER_MODELS**
 
 Default is None. Please change it if You have many users model classes which You
-want to be handle by geolocation alert:
+want to be handle by geolocation alert::
 
     GEOLOCATION_USER_MODELS = [
         "auth.User",
@@ -131,4 +127,3 @@ If You want to is_staff members logout to 'auth:logout' turn it on.
 Default is set to True, but if You need to work on staging - for example,
 with one admin for many users (testers and developers)
 it's useful to turn it off.
-

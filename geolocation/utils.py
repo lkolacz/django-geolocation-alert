@@ -33,6 +33,8 @@ if isinstance(GEOLOCATION_USER_MODELS, list):
 else:
     __user_classes.append(get_user_model())
 
+__user_classes = tuple(__user_classes)
+
 
 def get_user(request):
     """
@@ -46,7 +48,7 @@ def get_user(request):
     """
     global __user_classes
     user = getattr(request, 'user', None)
-    if user and user.__class__ in __user_classes:
+    if isinstance(user, __user_classes):
         return user
     else:
         return None
