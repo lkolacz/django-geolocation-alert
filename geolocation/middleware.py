@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect, HttpResponse
+
 from .utils import get_user, get_user_session_geolocation_hash
 from .signal import GeolocationAlert
 from .settings import (

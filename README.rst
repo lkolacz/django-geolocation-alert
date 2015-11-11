@@ -5,12 +5,13 @@ Django Geolocation Alert is an middleware that control user IP address
 and agent browser during session time. If someone will take session id 
 and try to use it from another IP or different agent browser Alert will raise
 so user will be logged out with alert messages.
-You can alsow turn on send signal to make some custom staff by handling it.
+You can also turn on send signal to make some custom staff by handling it.
 Lot of User class that can be authenticated? Don't worry take a look below.
 
 The app integrates smoothly with any Django project.
 All You need to do is install app and add middleware to MIDDLEWARE_CLASSES
-in settings. Please read Quickstart to know hot to do that.
+in settings. Please read Quick start to know hot to do that.
+
 
 Features
 --------
@@ -20,19 +21,27 @@ Features
 * Send geolocation alert as signal if User IP or agent browser will change and logout
 * Override settings if needed
 
+Future Features
+---------------
+
+* Confirm it works on django 1.7
+* PY2 & PY3 compabilities
+* Django downgrade compabilities 1.6, 1.5, 1.4
+* unit tests
+
 Requirements
 ------------
 
-* Django >= 1.8 (*don't work under 1.7 for 100% sure; tested on 1.8)
+* Django >= 1.8
 * Python >= 2.7
 
-Licence
+License
 -------
 
 MIT
 
-Quickstart
-----------
+Quick Start
+-----------
 
 Install django-geolocation-alert in your system by command::
 

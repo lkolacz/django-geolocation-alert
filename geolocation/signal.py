@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.dispatch import Signal
 from django.contrib.auth.signals import user_logged_in
+
 from .settings import GEOLOCATION_HASH
 from .utils import get_user, get_user_session_geolocation_hash
 
