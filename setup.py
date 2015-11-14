@@ -24,13 +24,13 @@ setup(
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 1.8'
+        'Framework :: Django :: 1.8',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Natural Language :: English'
+        'Natural Language :: English',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Topic :: Security',
-        'Topic :: System :: Monitoring,'
+        'Topic :: System :: Monitoring',
     ],
 )
