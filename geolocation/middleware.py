@@ -23,14 +23,13 @@ class GeolocationMiddleware(object):
         during session time GWM will redirect to logout page and send
         "geolocation_watchman.signal.geolocation_watchman_signal"
         """
-        if GEOLOCATION_IS_ACTIVE is not True:
+        if not GEOLOCATION_IS_ACTIVE:
             return response or HttpResponse(request)
 
         user = get_user(request)
         if user:
             expected_hash = request.session.get(GEOLOCATION_HASH)
             hash_to_check = get_user_session_geolocation_hash(request)
-
             if expected_hash and hash_to_check != expected_hash:
                 logout_url = settings.LOGOUT_URL
                 if GEOLOCATION_STAFF_REDIRECT and\

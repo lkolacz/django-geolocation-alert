@@ -63,7 +63,7 @@ def __get_remote_addr(request):
     if __use_forwarded:
         addr = request.META.get('HTTP_X_FORWARDED_FOR', None)
     if addr is None:
-        addr = request.META.get('REMOTE_ADDR', '0.0.0.0')
+        addr = request.META.get('REMOTE_ADDR', None)
     return addr
 
 
@@ -82,6 +82,9 @@ def get_user_session_geolocation_hash(request=None, agent='', addr=''):
     if request:
         agent = request.META.get('HTTP_USER_AGENT')
         addr = __get_remote_addr(request)
+
+    if not agent or not addr:
+        return None
 
     value = addr + "||" + agent
     return base64.b64encode(value)

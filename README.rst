@@ -32,8 +32,8 @@ Future Features
 Requirements
 ------------
 
-* Django >= 1.8
-* Python >= 2.7
+* Django == 1.8
+* Python == 2.7
 
 License
 -------
@@ -51,8 +51,7 @@ Then use it in a django project by putting middleware to Your settings::
 
     MIDDLEWARE_CLASSES = (
         ..
-        'geolocation.middleware.GeolocationMiddleware',
-        ..
+        'geolocation.middleware.GeolocationMiddleware'
     )
 
 Now it's works :)
@@ -68,13 +67,14 @@ More custom? Ok, lets handle alert signals!
 
 2. Connect Your function with signal::
 
-    from geolocation.signal import geolocation_signal
-    geolocation_signal.connect(alert_geolocation_handler)
+    from geolocation.signal import geo_alert_occurred
+    geo_alert_occurred.connect(alert_geolocation_handler)
+    # I suggest connect it inside "basic app_module.views.py"
+    # make sure that geo_alert_occurred.has_listeners() is True
 
 3. Last step -> Turn On send alert signal in your prj settings::
 
     GEOLOCATION_SEND_SIGNAL = True
-
 
 
 django.conf.settings

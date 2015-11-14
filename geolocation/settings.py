@@ -12,8 +12,8 @@ GEOLOCATION_SEND_MSG = getattr(settings, 'GEOLOCATION_SEND_MSG', None)
 
 if GEOLOCATION_SEND_MSG is None:
     GEOLOCATION_SEND_MSG = _(
-        "IP address or agent browser change during session time,"
-        " after log on.")
+        "IP address or web browser changed during active session."
+        " To ensure safety, please log in again.")
 
 GEOLOCATION_USER_MODELS = getattr(settings, 'GEOLOCATION_USER_MODELS', None)
 
