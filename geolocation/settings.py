@@ -16,6 +16,3 @@ if GEOLOCATION_SEND_MSG is None:
         " To ensure safety, please log in again.")
 
 GEOLOCATION_USER_MODELS = getattr(settings, 'GEOLOCATION_USER_MODELS', None)
-
-GEOLOCATION_STAFF_REDIRECT = \
-    getattr(settings, 'GEOLOCATION_STAFF_REDIRECT', False)

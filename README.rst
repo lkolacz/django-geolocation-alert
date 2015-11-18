@@ -126,11 +126,6 @@ Now if anybody will take session id and will try it from different IP
 or agent browser will be logged out. If there is different User class,
 not noticed in the list it won't be handled by alert!
 
-**GEOLOCATION_STAFF_REDIRECT**
-
-Default is set to False and users are logged out to settings.LOGOUT_URL.
-If You want to is_staff members logout to 'auth:logout' turn it on.
-
 **GEOLOCATION_IS_ACTIVE**
 
 Default is set to True, but if You need to work on staging - for example,
