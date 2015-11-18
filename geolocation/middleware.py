@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.conf import settings
 from django.contrib import messages
-from django.shortcuts import redirect, HttpResponse
+from django.contrib.auth import logout
 
 from .utils import get_user, get_user_session_geolocation_hash
 from .signal import GeolocationAlert
@@ -10,32 +9,27 @@ from .settings import (
     GEOLOCATION_HASH,
     GEOLOCATION_SEND_SIGNAL,
     GEOLOCATION_SEND_MSG,
-    GEOLOCATION_STAFF_REDIRECT,
 )
 
 
 class GeolocationMiddleware(object):
 
-    def process_response(self, request, response):
+    def process_view(self, request, view_func, view_args, view_kwargs):
         """
         Geolocation middleware processing.
         If session hash (contained IP and agent browser name) will change
         during session time GWM will redirect to logout page and send
-        "geolocation_watchman.signal.geolocation_watchman_signal"
+        "geolocation.signal.geo_alert_occurred" signal.
         """
         if not GEOLOCATION_IS_ACTIVE:
-            return response or HttpResponse(request)
+            return
 
         user = get_user(request)
         if user:
             expected_hash = request.session.get(GEOLOCATION_HASH)
             hash_to_check = get_user_session_geolocation_hash(request)
             if expected_hash and hash_to_check != expected_hash:
-                logout_url = settings.LOGOUT_URL
-                if GEOLOCATION_STAFF_REDIRECT and\
-                        getattr(user, 'is_staff', False):
-                    logout_url = 'admin:logout'
-                response = redirect(logout_url)
+                logout(request)
                 if GEOLOCATION_SEND_MSG:
                     messages.add_message(
                         request,
@@ -46,4 +40,3 @@ class GeolocationMiddleware(object):
                     alert = GeolocationAlert()
                     alert.send_alert_signal(request, user)
 
-        return response or HttpResponse(request)
