@@ -9,7 +9,7 @@ def readme():
 
 setup(
     name='django-geolocation-alert',
-    version='0.5',
+    version='0.5.1',
     description=('Geolocation django middleware that check if user IP'
                  ' or agent browser change during session time.'),
     long_description=readme(),
